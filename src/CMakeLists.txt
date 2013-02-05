@@ -3,12 +3,14 @@ set(SOURCES
     pages/welcomepage.cpp
     pages/partitionpage.cpp
     pages/installpage.cpp
+    pages/thankspage.cpp
 )
 
 set(UI_SOURCES
     pages/welcomepage.ui
     pages/partitionpage.ui
     pages/installpage.ui
+    pages/thankspage.ui
 )
 
 set(QM_SOURCES

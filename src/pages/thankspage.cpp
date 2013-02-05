@@ -24,31 +24,25 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QApplication>
-#include <QWizard>
+#include <QIcon>
+#include <QPixmap>
 
-#include "pages/welcomepage.h"
-#include "pages/partitionpage.h"
-#include "pages/installpage.h"
-#include "pages/thankspage.h"
+#include "thankspage.h"
+#include "ui_thankspage.h"
 
-int main(int argc, char *argv[])
+ThanksPage::ThanksPage(QWidget *parent)
+    : QWizardPage(parent)
+    , ui(new Ui::ThanksPage)
 {
-    setenv("DESKTOP_SESSION", "hawaii", 1);
+    setTitle(tr("Thank You"));
+    ui->setupUi(this);
 
-    QApplication app(argc, argv);
-    app.setApplicationName("Maui Installer");
-    app.setApplicationVersion("0.0.0");
-    app.setOrganizationDomain("maui-project.org");
-    app.setOrganizationName("Maui");
-    app.setQuitOnLastWindowClosed(true);
-
-    QWizard wizard;
-    wizard.addPage(new WelcomePage(&wizard));
-    wizard.addPage(new PartitionPage(&wizard));
-    wizard.addPage(new InstallPage(&wizard));
-    wizard.addPage(new ThanksPage(&wizard));
-    wizard.show();
-
-    return app.exec();
+    ui->computerIcon->setPixmap(QIcon::fromTheme("computer").pixmap(256));
 }
+
+ThanksPage::~ThanksPage()
+{
+    delete ui;
+}
+
+#include "moc_thankspage.cpp"
