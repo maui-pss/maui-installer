@@ -31,6 +31,8 @@
 
 int main(int argc, char *argv[])
 {
+    setenv("DESKTOP_SESSION", "hawaii", 1);
+
     QApplication app(argc, argv);
     app.setApplicationName("Maui Installer");
     app.setApplicationVersion("0.0.0");
