@@ -24,29 +24,24 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QApplication>
-#include <QWizard>
+#ifndef INSTALLPAGE_H
+#define INSTALLPAGE_H
 
-#include "pages/welcomepage.h"
-#include "pages/partitionpage.h"
-#include "pages/installpage.h"
+#include <QWizardPage>
 
-int main(int argc, char *argv[])
-{
-    setenv("DESKTOP_SESSION", "hawaii", 1);
-
-    QApplication app(argc, argv);
-    app.setApplicationName("Maui Installer");
-    app.setApplicationVersion("0.0.0");
-    app.setOrganizationDomain("maui-project.org");
-    app.setOrganizationName("Maui");
-    app.setQuitOnLastWindowClosed(true);
-
-    QWizard wizard;
-    wizard.addPage(new WelcomePage(&wizard));
-    wizard.addPage(new PartitionPage(&wizard));
-    wizard.addPage(new InstallPage(&wizard));
-    wizard.show();
-
-    return app.exec();
+namespace Ui {
+    class InstallPage;
 }
+
+class InstallPage : public QWizardPage
+{
+    Q_OBJECT
+public:
+    explicit InstallPage(QWidget *parent = 0);
+    ~InstallPage();
+
+private:
+    Ui::InstallPage *ui;
+};
+
+#endif // INSTALLPAGE_H

@@ -24,29 +24,24 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QApplication>
-#include <QWizard>
+#include <QIcon>
+#include <QPixmap>
 
-#include "pages/welcomepage.h"
-#include "pages/partitionpage.h"
-#include "pages/installpage.h"
+#include "installpage.h"
+#include "ui_installpage.h"
 
-int main(int argc, char *argv[])
+InstallPage::InstallPage(QWidget *parent)
+    : QWizardPage(parent)
+    , ui(new Ui::InstallPage)
 {
-    setenv("DESKTOP_SESSION", "hawaii", 1);
-
-    QApplication app(argc, argv);
-    app.setApplicationName("Maui Installer");
-    app.setApplicationVersion("0.0.0");
-    app.setOrganizationDomain("maui-project.org");
-    app.setOrganizationName("Maui");
-    app.setQuitOnLastWindowClosed(true);
-
-    QWizard wizard;
-    wizard.addPage(new WelcomePage(&wizard));
-    wizard.addPage(new PartitionPage(&wizard));
-    wizard.addPage(new InstallPage(&wizard));
-    wizard.show();
-
-    return app.exec();
+    setTitle(tr("Installing"));
+    ui->setupUi(this);
+    ui->mauiIcon->setPixmap(QIcon::fromTheme("start-here").pixmap(196));
 }
+
+InstallPage::~InstallPage()
+{
+    delete ui;
+}
+
+#include "moc_installpage.cpp"
