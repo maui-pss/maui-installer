@@ -24,27 +24,25 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QApplication>
-#include <QWizard>
+#ifndef PARTITIONPAGE_H
+#define PARTITIONPAGE_H
 
-#include "pages/welcomepage.h"
-#include "pages/partitionpage.h"
+#include <QWizardPage>
 
-int main(int argc, char *argv[])
-{
-    setenv("DESKTOP_SESSION", "hawaii", 1);
-
-    QApplication app(argc, argv);
-    app.setApplicationName("Maui Installer");
-    app.setApplicationVersion("0.0.0");
-    app.setOrganizationDomain("maui-project.org");
-    app.setOrganizationName("Maui");
-    app.setQuitOnLastWindowClosed(true);
-
-    QWizard wizard;
-    wizard.addPage(new WelcomePage(&wizard));
-    wizard.addPage(new PartitionPage(&wizard));
-    wizard.show();
-
-    return app.exec();
+namespace Ui {
+    class PartitionPage;
 }
+
+class PartitionPage : public QWizardPage
+{
+    Q_OBJECT
+    
+public:
+    explicit PartitionPage(QWidget *parent = 0);
+    ~PartitionPage();
+
+private:
+    Ui::PartitionPage *ui;
+};
+
+#endif // PARTITIONPAGE_H

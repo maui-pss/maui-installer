@@ -1,10 +1,12 @@
 set(SOURCES
     main.cpp
     pages/welcomepage.cpp
+    pages/partitionpage.cpp
 )
 
 set(UI_SOURCES
     pages/welcomepage.ui
+    pages/partitionpage.ui
 )
 
 set(QM_SOURCES
