@@ -51,13 +51,11 @@ public:
 
     explicit VolumeModel(QObject *parent = 0);
 
-    QString udi(const QModelIndex &index) const;
-
     QIcon icon(const QModelIndex &index) const;
 
     QString text(const QModelIndex &index) const;
 
-    QPointer<Solid::StorageVolume> volume(const QModelIndex &index);
+    Solid::Device device(const QModelIndex &index) const;
 
     QVariant data(const QModelIndex &index, int role) const;
 

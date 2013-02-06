@@ -36,11 +36,11 @@ namespace Ui {
 class WelcomePage : public QWizardPage
 {
     Q_OBJECT
-    
 public:
     explicit WelcomePage(QWidget *parent = 0);
     ~WelcomePage();
 
+    void initializePage();
     bool validatePage() const;
 
 private:

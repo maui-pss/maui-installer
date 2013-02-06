@@ -37,14 +37,22 @@ WelcomePage::WelcomePage(QWidget *parent)
 {
     setTitle(tr("Welcome"));
     ui->setupUi(this);
-    ui->computerIcon->setPixmap(QIcon::fromTheme("start-here").pixmap(196));
 
-    ui->languages->addItem("English");
+    // We need the user to select the language
+    registerField(QStringLiteral("language"), ui->languages,
+                  "currentRow", "currentRowChanged");
 }
 
 WelcomePage::~WelcomePage()
 {
     delete ui;
+}
+
+void WelcomePage::initializePage()
+{
+    ui->computerIcon->setPixmap(QIcon::fromTheme("start-here").pixmap(196));
+
+    ui->languages->addItem("English");
 }
 
 bool WelcomePage::validatePage() const

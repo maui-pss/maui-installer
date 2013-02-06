@@ -30,6 +30,7 @@
 #include <QPointer>
 #include <QTextDocument>
 
+#include <solid/device.h>
 #include <solid/storagevolume.h>
 
 #include "volumedelegate.h"
@@ -49,7 +50,8 @@ void VolumeDelegate::paint(QPainter *painter,
 {
     bool isLTR = option.direction == Qt::LeftToRight;
     const VolumeModel *model = qobject_cast<const VolumeModel *>(index.model());
-    QPointer<Solid::StorageVolume> volume = const_cast<VolumeModel *>(model)->volume(index);
+    Solid::Device device = const_cast<VolumeModel *>(model)->device(index);
+    QPointer<Solid::StorageVolume> volume = device.as<Solid::StorageVolume>();
     QIcon icon = model->icon(index);
     QString text = model->text(index);
 

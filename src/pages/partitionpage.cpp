@@ -38,10 +38,12 @@ PartitionPage::PartitionPage(QWidget *parent)
     , ui(new Ui::PartitionPage)
 {
     ui->setupUi(this);
-    ui->mauiIcon->setPixmap(QIcon::fromTheme("start-here").pixmap(196));
 
     ui->partitions->setModel(new VolumeModel(this));
     ui->partitions->setItemDelegate(new VolumeDelegate(this));
+
+    connect(ui->partitions, SIGNAL(clicked(QModelIndex)),
+            this, SLOT(volumeSelected(QModelIndex)));
 }
 
 PartitionPage::~PartitionPage()
@@ -49,14 +51,27 @@ PartitionPage::~PartitionPage()
     delete ui;
 }
 
-bool PartitionPage::validatePage() const
+void PartitionPage::initializePage()
+{
+    ui->mauiIcon->setPixmap(QIcon::fromTheme("start-here").pixmap(196));
+}
+
+bool PartitionPage::isComplete() const
 {
     VolumeModel *model = qobject_cast<VolumeModel *>(ui->partitions->model());
-    QModelIndex selectedIndex = ui->partitions->selectionModel()->currentIndex();
+
+    if (!m_selectedIndex.isValid())
+        return false;
 
     Installer *installer = qobject_cast<Installer *>(QApplication::instance());
-    installer->setVolumeUdi(model->udi(selectedIndex));
+    installer->setVolumeDevice(model->device(m_selectedIndex));
     return true;
+}
+
+void PartitionPage::volumeSelected(const QModelIndex &index)
+{
+    m_selectedIndex = index;
+    completeChanged();
 }
 
 #include "moc_partitionpage.cpp"

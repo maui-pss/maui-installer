@@ -40,6 +40,8 @@ public:
     explicit InstallPage(QWidget *parent = 0);
     ~InstallPage();
 
+    void initializePage();
+
 private:
     Ui::InstallPage *ui;
 };

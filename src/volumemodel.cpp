@@ -56,11 +56,6 @@ VolumeModel::VolumeModel(QObject *parent)
     reloadDevices();
 }
 
-QString VolumeModel::udi(const QModelIndex &index) const
-{
-    return data(index, VolumeModel::UdiRole).toString();
-}
-
 QIcon VolumeModel::icon(const QModelIndex &index) const
 {
     return QIcon(data(index, Qt::DecorationRole).value<QIcon>());
@@ -71,10 +66,10 @@ QString VolumeModel::text(const QModelIndex &index) const
     return data(index, Qt::DisplayRole).toString();
 }
 
-QPointer<Solid::StorageVolume> VolumeModel::volume(const QModelIndex &index)
+Solid::Device VolumeModel::device(const QModelIndex &index) const
 {
     VolumeItem *item = m_items.at(index.row());
-    return item->volume();
+    return item->device();
 }
 
 QVariant VolumeModel::data(const QModelIndex &index, int role) const

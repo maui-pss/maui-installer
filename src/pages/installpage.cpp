@@ -29,6 +29,7 @@
 
 #include "installpage.h"
 #include "ui_installpage.h"
+#include "installer.h"
 
 InstallPage::InstallPage(QWidget *parent)
     : QWizardPage(parent)
@@ -36,12 +37,20 @@ InstallPage::InstallPage(QWidget *parent)
 {
     setTitle(tr("Installing"));
     ui->setupUi(this);
-    ui->mauiIcon->setPixmap(QIcon::fromTheme("start-here").pixmap(196));
 }
 
 InstallPage::~InstallPage()
 {
     delete ui;
+}
+
+void InstallPage::initializePage()
+{
+    Installer *installer = qobject_cast<Installer *>(QApplication::instance());
+    Solid::Device device = installer->volumeDevice();
+
+    ui->mauiIcon->setPixmap(QIcon::fromTheme("start-here").pixmap(196));
+    ui->installInfo->setText(ui->installInfo->text().arg(device.description()));
 }
 
 #include "moc_installpage.cpp"

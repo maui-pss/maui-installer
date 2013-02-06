@@ -29,11 +29,11 @@
 
 #include <QApplication>
 
+#include <solid/device.h>
+
 class Installer : public QApplication
 {
     Q_OBJECT
-    Q_PROPERTY(QString language READ language WRITE setLanguage)
-    Q_PROPERTY(QString volumeUdi READ volumeUdi WRITE setVolumeUdi)
 public:
     explicit Installer(int &argc, char *argv[]);
 
@@ -45,17 +45,17 @@ public:
         m_language = language;
     }
 
-    QString volumeUdi() const {
-        return m_udi;
+    Solid::Device volumeDevice() const {
+        return m_volumeDevice;
     }
 
-    void setVolumeUdi(const QString &udi) {
-        m_udi = udi;
+    void setVolumeDevice(const Solid::Device &volumeDevice) {
+        m_volumeDevice = volumeDevice;
     }
 
 private:
     QString m_language;
-    QString m_udi;
+    Solid::Device m_volumeDevice;
 };
 
 #endif // INSTALLER_H

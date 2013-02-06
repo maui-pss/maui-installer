@@ -38,7 +38,7 @@
     </spacer>
    </item>
    <item>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="installInfo">
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Installing Maui on the disk &amp;quot;%1&amp;quot;...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
@@ -48,7 +48,7 @@
     <widget class="QProgressBar" name="progressBar"/>
    </item>
    <item>
-    <widget class="QLabel" name="label_2">
+    <widget class="QLabel" name="timeRemaining">
      <property name="text">
       <string>Time remaining: %1</string>
      </property>

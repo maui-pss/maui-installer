@@ -27,6 +27,7 @@
 #ifndef PARTITIONPAGE_H
 #define PARTITIONPAGE_H
 
+#include <QModelIndex>
 #include <QWizardPage>
 
 namespace Ui {
@@ -36,15 +37,19 @@ namespace Ui {
 class PartitionPage : public QWizardPage
 {
     Q_OBJECT
-    
 public:
     explicit PartitionPage(QWidget *parent = 0);
     ~PartitionPage();
 
-    bool validatePage() const;
+    void initializePage();
+    bool isComplete() const;
 
 private:
     Ui::PartitionPage *ui;
+    QModelIndex m_selectedIndex;
+
+private Q_SLOTS:
+    void volumeSelected(const QModelIndex &index);
 };
 
 #endif // PARTITIONPAGE_H
