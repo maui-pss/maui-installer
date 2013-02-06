@@ -24,7 +24,6 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QCoreApplication>
 #include <QIcon>
 #include <QPixmap>
 
@@ -40,9 +39,6 @@ WelcomePage::WelcomePage(QWidget *parent)
     ui->computerIcon->setPixmap(QIcon::fromTheme("start-here").pixmap(196));
 
     ui->languages->addItem("English");
-
-    connect(ui->tryMaui, SIGNAL(clicked()),
-            QCoreApplication::instance(), SLOT(quit()));
 }
 
 WelcomePage::~WelcomePage()
