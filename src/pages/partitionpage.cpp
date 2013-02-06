@@ -71,7 +71,7 @@ bool PartitionPage::isComplete() const
 void PartitionPage::volumeSelected(const QModelIndex &index)
 {
     m_selectedIndex = index;
-    completeChanged();
+    Q_EMIT completeChanged();
 }
 
 #include "moc_partitionpage.cpp"
