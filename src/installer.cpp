@@ -24,26 +24,16 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QWizard>
-
 #include "installer.h"
-#include "pages/welcomepage.h"
-#include "pages/partitionpage.h"
-#include "pages/installpage.h"
-#include "pages/thankspage.h"
 
-int main(int argc, char *argv[])
+Installer::Installer(int &argc, char *argv[])
+    : QApplication(argc, argv)
 {
-    setenv("DESKTOP_SESSION", "hawaii", 1);
-
-    Installer app(argc, argv);
-
-    QWizard wizard;
-    wizard.addPage(new WelcomePage(&wizard));
-    wizard.addPage(new PartitionPage(&wizard));
-    wizard.addPage(new InstallPage(&wizard));
-    wizard.addPage(new ThanksPage(&wizard));
-    wizard.show();
-
-    return app.exec();
+    setApplicationName("Maui Installer");
+    setApplicationVersion("0.0.0");
+    setOrganizationDomain("maui-project.org");
+    setOrganizationName("Maui");
+    setQuitOnLastWindowClosed(true);
 }
+
+#include "moc_installer.cpp"

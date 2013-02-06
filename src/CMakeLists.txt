@@ -4,6 +4,7 @@ include_directories(
 
 set(SOURCES
     main.cpp
+    installer.cpp
     volumemodel.cpp
     volumeitem.cpp
     volumedelegate.cpp

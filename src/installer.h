@@ -24,26 +24,16 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QWizard>
+#ifndef INSTALLER_H
+#define INSTALLER_H
 
-#include "installer.h"
-#include "pages/welcomepage.h"
-#include "pages/partitionpage.h"
-#include "pages/installpage.h"
-#include "pages/thankspage.h"
+#include <QApplication>
 
-int main(int argc, char *argv[])
+class Installer : public QApplication
 {
-    setenv("DESKTOP_SESSION", "hawaii", 1);
+    Q_OBJECT
+public:
+    explicit Installer(int &argc, char *argv[]);
+};
 
-    Installer app(argc, argv);
-
-    QWizard wizard;
-    wizard.addPage(new WelcomePage(&wizard));
-    wizard.addPage(new PartitionPage(&wizard));
-    wizard.addPage(new InstallPage(&wizard));
-    wizard.addPage(new ThanksPage(&wizard));
-    wizard.show();
-
-    return app.exec();
-}
+#endif // INSTALLER_H
