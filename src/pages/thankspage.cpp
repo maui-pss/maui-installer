@@ -36,13 +36,16 @@ ThanksPage::ThanksPage(QWidget *parent)
 {
     setTitle(tr("Thank You"));
     ui->setupUi(this);
-
-    ui->computerIcon->setPixmap(QIcon::fromTheme("computer").pixmap(256));
 }
 
 ThanksPage::~ThanksPage()
 {
     delete ui;
+}
+
+void ThanksPage::initializePage()
+{
+    ui->computerIcon->setPixmap(QIcon::fromTheme("computer").pixmap(256));
 }
 
 #include "moc_thankspage.cpp"

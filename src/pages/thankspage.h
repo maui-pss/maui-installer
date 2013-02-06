@@ -40,6 +40,8 @@ public:
     explicit ThanksPage(QWidget *parent = 0);
     ~ThanksPage();
 
+    void initializePage();
+
 private:
     Ui::ThanksPage *ui;
 };
