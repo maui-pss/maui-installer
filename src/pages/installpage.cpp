@@ -24,8 +24,10 @@
  * $END_LICENSE$
  ***************************************************************************/
 
+#include <QAbstractButton>
 #include <QIcon>
 #include <QPixmap>
+#include <QTimer>
 
 #include "installpage.h"
 #include "ui_installpage.h"
@@ -50,7 +52,21 @@ void InstallPage::initializePage()
     Solid::Device device = installer->volumeDevice();
 
     ui->mauiIcon->setPixmap(QIcon::fromTheme("start-here").pixmap(196));
-    ui->installInfo->setText(ui->installInfo->text().arg(device.description()));
+    ui->installInfo->setText(tr("Installing Maui on the disk \"%1\"...")
+                             .arg(device.description()));
+
+    QTimer::singleShot(0, this, SLOT(start()));
+}
+
+bool InstallPage::isComplete() const
+{
+    return false;
+}
+
+void InstallPage::start()
+{
+    ui->timeRemaining->setText(tr("Time remaining: Calculating..."));
+    wizard()->button(QWizard::BackButton)->setEnabled(false);
 }
 
 #include "moc_installpage.cpp"

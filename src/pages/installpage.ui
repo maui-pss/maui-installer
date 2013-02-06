@@ -39,8 +39,14 @@
    </item>
    <item>
     <widget class="QLabel" name="installInfo">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Installing Maui on the disk &amp;quot;%1&amp;quot;...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string notr="true">$INSTALL_INFO$</string>
      </property>
     </widget>
    </item>
@@ -50,7 +56,7 @@
    <item>
     <widget class="QLabel" name="timeRemaining">
      <property name="text">
-      <string>Time remaining: %1</string>
+      <string notr="true">$TIME_REMAINING$</string>
      </property>
     </widget>
    </item>

@@ -41,9 +41,13 @@ public:
     ~InstallPage();
 
     void initializePage();
+    bool isComplete() const;
 
 private:
     Ui::InstallPage *ui;
+
+private Q_SLOTS:
+    void start();
 };
 
 #endif // INSTALLPAGE_H
