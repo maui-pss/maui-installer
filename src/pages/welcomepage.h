@@ -45,6 +45,9 @@ public:
 
 private:
     Ui::WelcomePage *ui;
+
+private Q_SLOTS:
+    void start();
 };
 
 #endif // WELCOMEPAGE_H

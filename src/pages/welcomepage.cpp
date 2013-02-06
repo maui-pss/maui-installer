@@ -24,8 +24,10 @@
  * $END_LICENSE$
  ***************************************************************************/
 
+#include <QAbstractButton>
 #include <QIcon>
 #include <QPixmap>
+#include <QTimer>
 
 #include "welcomepage.h"
 #include "ui_welcomepage.h"
@@ -53,6 +55,10 @@ void WelcomePage::initializePage()
     ui->computerIcon->setPixmap(QIcon::fromTheme("start-here").pixmap(196));
 
     ui->languages->addItem("English");
+
+    wizard()->setButtonText(QWizard::CancelButton, tr("Try Maui"));
+    wizard()->setButtonText(QWizard::NextButton, tr("Install Maui"));
+    QTimer::singleShot(0, this, SLOT(start()));
 }
 
 bool WelcomePage::validatePage() const
@@ -60,6 +66,11 @@ bool WelcomePage::validatePage() const
     Installer *installer = qobject_cast<Installer *>(QApplication::instance());
     installer->setLanguage("English");
     return true;
+}
+
+void WelcomePage::start()
+{
+    wizard()->button(QWizard::BackButton)->setVisible(false);
 }
 
 #include "moc_welcomepage.cpp"
