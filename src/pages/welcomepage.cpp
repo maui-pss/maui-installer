@@ -27,7 +27,6 @@
 #include <QAbstractButton>
 #include <QIcon>
 #include <QPixmap>
-#include <QTimer>
 
 #include "welcomepage.h"
 #include "ui_welcomepage.h"
@@ -56,21 +55,32 @@ void WelcomePage::initializePage()
 
     ui->languages->addItem("English");
 
-    wizard()->setButtonText(QWizard::CancelButton, tr("Try Maui"));
-    wizard()->setButtonText(QWizard::NextButton, tr("Install Maui"));
-    QTimer::singleShot(0, this, SLOT(start()));
+    // Save the original text, we'll use it when the page is hidden to restore
+    // original values
+    m_cancelText = wizard()->buttonText(QWizard::CancelButton);
+    m_nextText = wizard()->buttonText(QWizard::NextButton);
 }
 
 bool WelcomePage::validatePage() const
 {
     Installer *installer = qobject_cast<Installer *>(QApplication::instance());
     installer->setLanguage("English");
+
     return true;
 }
 
-void WelcomePage::start()
+void WelcomePage::showEvent(QShowEvent *event)
 {
     wizard()->button(QWizard::BackButton)->setVisible(false);
+    wizard()->setButtonText(QWizard::CancelButton, tr("Try Maui"));
+    wizard()->setButtonText(QWizard::NextButton, tr("Install Maui"));
+}
+
+void WelcomePage::hideEvent(QHideEvent *event)
+{
+    wizard()->button(QWizard::BackButton)->setVisible(true);
+    wizard()->setButtonText(QWizard::CancelButton, m_cancelText);
+    wizard()->setButtonText(QWizard::NextButton, m_nextText);
 }
 
 #include "moc_welcomepage.cpp"

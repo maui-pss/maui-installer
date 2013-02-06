@@ -43,11 +43,14 @@ public:
     void initializePage();
     bool validatePage() const;
 
+protected:
+    void showEvent(QShowEvent *event);
+    void hideEvent(QHideEvent *event);
+
 private:
     Ui::WelcomePage *ui;
-
-private Q_SLOTS:
-    void start();
+    QString m_cancelText;
+    QString m_nextText;
 };
 
 #endif // WELCOMEPAGE_H
