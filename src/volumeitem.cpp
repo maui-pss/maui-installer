@@ -25,27 +25,30 @@
  ***************************************************************************/
 
 #include <QIcon>
-#include <QPixmap>
 
-#include "partitionpage.h"
-#include "ui_partitionpage.h"
-#include "volumemodel.h"
-#include "volumedelegate.h"
+#include "volumeitem.h"
 
-PartitionPage::PartitionPage(QWidget *parent)
-    : QWizardPage(parent)
-    , ui(new Ui::PartitionPage)
+VolumeItem::VolumeItem(const QString &udi, QObject *parent)
+    : QObject(parent)
 {
-    ui->setupUi(this);
-    ui->mauiIcon->setPixmap(QIcon::fromTheme("start-here").pixmap(196));
-
-    ui->partitions->setModel(new VolumeModel(this));
-    ui->partitions->setItemDelegate(new VolumeDelegate(this));
+    m_device = Solid::Device(udi);
 }
 
-PartitionPage::~PartitionPage()
+QVariant VolumeItem::data(int role)
 {
-    delete ui;
+    if (!m_device.isValid())
+        return QVariant();
+
+    switch (role) {
+    case Qt::DecorationRole:
+        return QIcon::fromTheme(m_device.icon());
+    case Qt::DisplayRole:
+        return m_device.description();
+    default:
+        break;
+    }
+
+    return QVariant();
 }
 
-#include "moc_partitionpage.cpp"
+#include "moc_volumeitem.cpp"

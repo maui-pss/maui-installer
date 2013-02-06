@@ -24,28 +24,33 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QIcon>
-#include <QPixmap>
+#ifndef VOLUMEITEM_H
+#define VOLUMEITEM_H
 
-#include "partitionpage.h"
-#include "ui_partitionpage.h"
-#include "volumemodel.h"
-#include "volumedelegate.h"
+#include <QObject>
+#include <QPointer>
 
-PartitionPage::PartitionPage(QWidget *parent)
-    : QWizardPage(parent)
-    , ui(new Ui::PartitionPage)
+#include <solid/device.h>
+#include <solid/storagevolume.h>
+
+class VolumeItem : public QObject
 {
-    ui->setupUi(this);
-    ui->mauiIcon->setPixmap(QIcon::fromTheme("start-here").pixmap(196));
+    Q_OBJECT
+public:
+    explicit VolumeItem(const QString &udi, QObject *parent = 0);
 
-    ui->partitions->setModel(new VolumeModel(this));
-    ui->partitions->setItemDelegate(new VolumeDelegate(this));
-}
+    Solid::Device device() const {
+        return m_device;
+    }
 
-PartitionPage::~PartitionPage()
-{
-    delete ui;
-}
+    QPointer<Solid::StorageVolume> volume() {
+        return m_device.as<Solid::StorageVolume>();
+    }
 
-#include "moc_partitionpage.cpp"
+    QVariant data(int role);
+
+private:
+    Solid::Device m_device;
+};
+
+#endif // VOLUMEITEM_H

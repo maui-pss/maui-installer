@@ -24,28 +24,27 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QIcon>
-#include <QPixmap>
+#ifndef VOLUMEDELEGATE_H
+#define VOLUMEDELEGATE_H
 
-#include "partitionpage.h"
-#include "ui_partitionpage.h"
-#include "volumemodel.h"
-#include "volumedelegate.h"
+#include <QAbstractItemDelegate>
 
-PartitionPage::PartitionPage(QWidget *parent)
-    : QWizardPage(parent)
-    , ui(new Ui::PartitionPage)
+class VolumeDelegate : public QAbstractItemDelegate
 {
-    ui->setupUi(this);
-    ui->mauiIcon->setPixmap(QIcon::fromTheme("start-here").pixmap(196));
+    Q_OBJECT
+public:
+    explicit VolumeDelegate(QObject *parent = 0);
 
-    ui->partitions->setModel(new VolumeModel(this));
-    ui->partitions->setItemDelegate(new VolumeDelegate(this));
-}
+    void paint(QPainter *painter, const QStyleOptionViewItem &option,
+               const QModelIndex &index) const;
 
-PartitionPage::~PartitionPage()
-{
-    delete ui;
-}
+    QSize sizeHint(const QStyleOptionViewItem &option,
+                   const QModelIndex &index) const;
 
-#include "moc_partitionpage.cpp"
+private:
+    QSize m_iconSize;
+
+    QString representSize(qulonglong size) const;
+};
+
+#endif // VOLUMEDELEGATE_H

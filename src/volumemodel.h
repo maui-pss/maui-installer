@@ -24,28 +24,49 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QIcon>
-#include <QPixmap>
+#ifndef VOLUMEMODEL_H
+#define VOLUMEMODEL_H
 
-#include "partitionpage.h"
-#include "ui_partitionpage.h"
-#include "volumemodel.h"
-#include "volumedelegate.h"
+#include <QAbstractListModel>
 
-PartitionPage::PartitionPage(QWidget *parent)
-    : QWizardPage(parent)
-    , ui(new Ui::PartitionPage)
-{
-    ui->setupUi(this);
-    ui->mauiIcon->setPixmap(QIcon::fromTheme("start-here").pixmap(196));
+#include <solid/predicate.h>
 
-    ui->partitions->setModel(new VolumeModel(this));
-    ui->partitions->setItemDelegate(new VolumeDelegate(this));
+class QStringList;
+
+namespace Solid {
+    class DeviceNotifier;
+    class StorageVolume;
 }
 
-PartitionPage::~PartitionPage()
-{
-    delete ui;
-}
+class VolumeItem;
 
-#include "moc_partitionpage.cpp"
+class VolumeModel : public QAbstractListModel
+{
+    Q_OBJECT
+public:
+    explicit VolumeModel(QObject *parent = 0);
+
+    QIcon icon(const QModelIndex &index) const;
+
+    QString text(const QModelIndex &index) const;
+
+    QPointer<Solid::StorageVolume> volume(const QModelIndex &index);
+
+    QVariant data(const QModelIndex &index, int role) const;
+
+    int rowCount(const QModelIndex &parent) const;
+
+private:
+    Solid::Predicate m_predicate;
+    Solid::DeviceNotifier *m_notifier;
+    QStringList m_availableDevices;
+    QList<VolumeItem *> m_items;
+
+    void reloadDevices();
+
+private Q_SLOTS:
+    void deviceAdded(const QString &udi);
+    void deviceRemoved(const QString &udi);
+};
+
+#endif // VOLUMEMODEL_H
