@@ -41,6 +41,8 @@ public:
     explicit WelcomePage(QWidget *parent = 0);
     ~WelcomePage();
 
+    bool validatePage() const;
+
 private:
     Ui::WelcomePage *ui;
 };

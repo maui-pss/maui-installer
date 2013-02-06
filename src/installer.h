@@ -32,8 +32,30 @@
 class Installer : public QApplication
 {
     Q_OBJECT
+    Q_PROPERTY(QString language READ language WRITE setLanguage)
+    Q_PROPERTY(QString volumeUdi READ volumeUdi WRITE setVolumeUdi)
 public:
     explicit Installer(int &argc, char *argv[]);
+
+    QString language() const {
+        return m_language;
+    }
+
+    void setLanguage(const QString &language) {
+        m_language = language;
+    }
+
+    QString volumeUdi() const {
+        return m_udi;
+    }
+
+    void setVolumeUdi(const QString &udi) {
+        m_udi = udi;
+    }
+
+private:
+    QString m_language;
+    QString m_udi;
 };
 
 #endif // INSTALLER_H

@@ -29,6 +29,7 @@
 
 #include "partitionpage.h"
 #include "ui_partitionpage.h"
+#include "installer.h"
 #include "volumemodel.h"
 #include "volumedelegate.h"
 
@@ -46,6 +47,16 @@ PartitionPage::PartitionPage(QWidget *parent)
 PartitionPage::~PartitionPage()
 {
     delete ui;
+}
+
+bool PartitionPage::validatePage() const
+{
+    VolumeModel *model = qobject_cast<VolumeModel *>(ui->partitions->model());
+    QModelIndex selectedIndex = ui->partitions->selectionModel()->currentIndex();
+
+    Installer *installer = qobject_cast<Installer *>(QApplication::instance());
+    installer->setVolumeUdi(model->udi(selectedIndex));
+    return true;
 }
 
 #include "moc_partitionpage.cpp"

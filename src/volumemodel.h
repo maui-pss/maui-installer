@@ -43,8 +43,15 @@ class VolumeItem;
 class VolumeModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_ENUMS(VolumeRole)
 public:
+    enum VolumeRole {
+        UdiRole = Qt::UserRole + 1
+    };
+
     explicit VolumeModel(QObject *parent = 0);
+
+    QString udi(const QModelIndex &index) const;
 
     QIcon icon(const QModelIndex &index) const;
 

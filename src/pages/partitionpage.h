@@ -41,6 +41,8 @@ public:
     explicit PartitionPage(QWidget *parent = 0);
     ~PartitionPage();
 
+    bool validatePage() const;
+
 private:
     Ui::PartitionPage *ui;
 };

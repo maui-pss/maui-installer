@@ -27,6 +27,7 @@
 #include <QIcon>
 
 #include "volumeitem.h"
+#include "volumemodel.h"
 
 VolumeItem::VolumeItem(const QString &udi, QObject *parent)
     : QObject(parent)
@@ -44,6 +45,8 @@ QVariant VolumeItem::data(int role)
         return QIcon::fromTheme(m_device.icon());
     case Qt::DisplayRole:
         return m_device.description();
+    case VolumeModel::UdiRole:
+        return m_device.udi();
     default:
         break;
     }

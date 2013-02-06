@@ -29,6 +29,7 @@
 
 #include "welcomepage.h"
 #include "ui_welcomepage.h"
+#include "installer.h"
 
 WelcomePage::WelcomePage(QWidget *parent)
     : QWizardPage(parent)
@@ -44,6 +45,13 @@ WelcomePage::WelcomePage(QWidget *parent)
 WelcomePage::~WelcomePage()
 {
     delete ui;
+}
+
+bool WelcomePage::validatePage() const
+{
+    Installer *installer = qobject_cast<Installer *>(QApplication::instance());
+    installer->setLanguage("English");
+    return true;
 }
 
 #include "moc_welcomepage.cpp"

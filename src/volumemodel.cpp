@@ -56,6 +56,11 @@ VolumeModel::VolumeModel(QObject *parent)
     reloadDevices();
 }
 
+QString VolumeModel::udi(const QModelIndex &index) const
+{
+    return data(index, VolumeModel::UdiRole).toString();
+}
+
 QIcon VolumeModel::icon(const QModelIndex &index) const
 {
     return QIcon(data(index, Qt::DecorationRole).value<QIcon>());
