@@ -29,6 +29,7 @@
 Installer::Installer(int &argc, char *argv[])
     : QApplication(argc, argv)
 {
+    // Setup application
     setApplicationName("Maui Installer");
     setApplicationVersion("0.0.0");
     setOrganizationDomain("maui-project.org");

@@ -24,7 +24,11 @@
  * $END_LICENSE$
  ***************************************************************************/
 
+#include <QMessageBox>
 #include <QWizard>
+#include <QCloseEvent>
+#include <solid/acadapter.h>
+#include <solid/powermanagement.h>
 
 #include "installer.h"
 #include "pages/welcomepage.h"
@@ -34,16 +38,41 @@
 
 int main(int argc, char *argv[])
 {
+    // Make sure we use the correct desktop settings
     setenv("DESKTOP_SESSION", "hawaii", 1);
 
     Installer app(argc, argv);
 
+    // Setup wizard
     QWizard wizard;
     wizard.addPage(new WelcomePage(&wizard));
     wizard.addPage(new PartitionPage(&wizard));
     wizard.addPage(new InstallPage(&wizard));
     wizard.addPage(new ThanksPage(&wizard));
     wizard.show();
+
+    // Detect whether AC adapter is plugged or not
+    bool isPlugged = false;
+    const QList<Solid::Device> list = Solid::Device::listFromType(Solid::DeviceInterface::AcAdapter);
+    foreach (const Solid::Device &acAdapterDevice, list) {
+        const Solid::AcAdapter *acAdapter = acAdapterDevice.as<Solid::AcAdapter>();
+        isPlugged |= acAdapter->isPlugged();
+    }
+
+    // Warn about AC adaptater being unplugged
+    if (!isPlugged) {
+        QMessageBox dialog(&wizard);
+        dialog.setIcon(QMessageBox::Warning);
+        dialog.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        dialog.setText(Installer::tr("<b>Looks like your power adapter is unplugged</b>"));
+        dialog.setInformativeText(Installer::tr(
+                                      "Installation is a delicate and lenghty process, "
+                                      "hence it's strongly advised to have your PC connected "
+                                      "to AC in order to minimize possible risks.<br><br>"
+                                      "Would you like to continue?"));
+        if (dialog.exec() == QMessageBox::No)
+            app.postEvent(&app, new QCloseEvent);
+    }
 
     return app.exec();
 }
