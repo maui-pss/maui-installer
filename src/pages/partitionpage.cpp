@@ -25,7 +25,11 @@
  ***************************************************************************/
 
 #include <QIcon>
+#include <QMessageBox>
 #include <QPixmap>
+#include <QPointer>
+
+#include <solid/storagevolume.h>
 
 #include "partitionpage.h"
 #include "ui_partitionpage.h"
@@ -65,6 +69,26 @@ bool PartitionPage::isComplete() const
 
     Installer *installer = qobject_cast<Installer *>(QApplication::instance());
     installer->setVolumeDevice(model->device(m_selectedIndex));
+    return true;
+}
+
+bool PartitionPage::validatePage()
+{
+    VolumeModel *model = qobject_cast<VolumeModel *>(ui->partitions->model());
+    Solid::Device device = model->device(m_selectedIndex);
+    QPointer<Solid::StorageVolume> volume = device.as<Solid::StorageVolume>();
+
+    if (volume->size() < (1024 * 1024 * 1024)) {
+        QMessageBox dialog(this);
+        dialog.setIcon(QMessageBox::Critical);
+        dialog.setText(tr("<b>\"%1\" doesn't have enough space available</b>").arg(device.description()));
+        dialog.setInformativeText(tr("The selected partition has not enough free space, "
+                                     "Maui requires at least 1 GiB. Please select "
+                                     "another partition and try again."));
+        dialog.exec();
+        return false;
+    }
+
     return true;
 }
 

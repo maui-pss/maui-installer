@@ -43,6 +43,7 @@ public:
 
     void initializePage();
     bool isComplete() const;
+    bool validatePage();
 
 private:
     Ui::PartitionPage *ui;
