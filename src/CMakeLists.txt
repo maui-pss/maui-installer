@@ -10,6 +10,7 @@ set(SOURCES
     volumedelegate.cpp
     pages/welcomepage.cpp
     pages/partitionpage.cpp
+    pages/userpage.cpp
     pages/installpage.cpp
     pages/thankspage.cpp
 )
@@ -17,6 +18,7 @@ set(SOURCES
 set(UI_SOURCES
     pages/welcomepage.ui
     pages/partitionpage.ui
+    pages/userpage.ui
     pages/installpage.ui
     pages/thankspage.ui
 )

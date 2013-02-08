@@ -33,6 +33,7 @@
 #include "installer.h"
 #include "pages/welcomepage.h"
 #include "pages/partitionpage.h"
+#include "pages/userpage.h"
 #include "pages/installpage.h"
 #include "pages/thankspage.h"
 
@@ -47,6 +48,7 @@ int main(int argc, char *argv[])
     QWizard wizard;
     wizard.addPage(new WelcomePage(&wizard));
     wizard.addPage(new PartitionPage(&wizard));
+    wizard.addPage(new UserPage(&wizard));
     wizard.addPage(new InstallPage(&wizard));
     wizard.addPage(new ThanksPage(&wizard));
     wizard.show();
