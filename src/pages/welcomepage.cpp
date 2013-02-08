@@ -36,7 +36,6 @@ WelcomePage::WelcomePage(QWidget *parent)
     : QWizardPage(parent)
     , ui(new Ui::WelcomePage)
 {
-    setTitle(tr("Welcome"));
     ui->setupUi(this);
 
     // We need the user to select the language
