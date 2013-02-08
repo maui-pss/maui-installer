@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>224</height>
+    <width>477</width>
+    <height>320</height>
    </rect>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
@@ -24,9 +24,9 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QLabel" name="computerIcon">
-       <property name="text">
-        <string notr="true">$COMPUTER_ICON$</string>
+      <widget class="QLabel" name="mauiIcon">
+       <property name="pixmap">
+        <pixmap resource="../installer.qrc">:/images/m.png</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -63,6 +63,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../installer.qrc"/>
+ </resources>
  <connections/>
 </ui>

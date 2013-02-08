@@ -25,8 +25,6 @@
  ***************************************************************************/
 
 #include <QAbstractButton>
-#include <QIcon>
-#include <QPixmap>
 
 #include "welcomepage.h"
 #include "ui_welcomepage.h"
@@ -50,8 +48,6 @@ WelcomePage::~WelcomePage()
 
 void WelcomePage::initializePage()
 {
-    ui->computerIcon->setPixmap(QIcon::fromTheme("start-here").pixmap(196));
-
     ui->languages->addItem("English");
 
     // Save the original text, we'll use it when the page is hidden to restore

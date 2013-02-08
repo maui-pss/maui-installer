@@ -7,14 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>351</width>
-    <height>231</height>
+    <height>254</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="mauiIcon">
-     <property name="text">
-      <string notr="true">$MAUI_ICON$</string>
+     <property name="pixmap">
+      <pixmap resource="../installer.qrc">:/images/m.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -43,6 +43,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../installer.qrc"/>
+ </resources>
  <connections/>
 </ui>

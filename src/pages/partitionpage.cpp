@@ -24,9 +24,7 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QIcon>
 #include <QMessageBox>
-#include <QPixmap>
 #include <QPointer>
 
 #include <solid/storagevolume.h>
@@ -57,7 +55,6 @@ PartitionPage::~PartitionPage()
 
 void PartitionPage::initializePage()
 {
-    ui->mauiIcon->setPixmap(QIcon::fromTheme("start-here").pixmap(196));
 }
 
 bool PartitionPage::isComplete() const

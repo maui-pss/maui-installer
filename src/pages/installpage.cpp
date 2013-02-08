@@ -25,8 +25,6 @@
  ***************************************************************************/
 
 #include <QAbstractButton>
-#include <QIcon>
-#include <QPixmap>
 #include <QTimer>
 
 #include "installpage.h"
@@ -51,7 +49,6 @@ void InstallPage::initializePage()
     Installer *installer = qobject_cast<Installer *>(QApplication::instance());
     Solid::Device device = installer->volumeDevice();
 
-    ui->mauiIcon->setPixmap(QIcon::fromTheme("start-here").pixmap(196));
     ui->installInfo->setText(tr("Installing Maui on the disk \"%1\"...")
                              .arg(device.description()));
 
