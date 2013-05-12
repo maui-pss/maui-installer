@@ -1,5 +1,5 @@
 include_directories(
-    ${solid_INCLUDE_DIRS}
+    ${Solid_INCLUDE_DIRS}
 )
 
 set(SOURCES
@@ -32,7 +32,7 @@ qt5_add_resources(RC_FILES installer.qrc)
 
 #add_executable(installer ${SOURCES} ${UI_FILES} ${RC_FILES} ${QM_FILES})
 add_executable(maui-installer ${SOURCES} ${UI_FILES} ${RC_FILES})
-target_link_libraries(maui-installer ${solid_LIBRARIES})
+target_link_libraries(maui-installer ${Solid_LIBRARIES})
 qt5_use_modules(maui-installer Widgets)
 
 install(TARGETS maui-installer

@@ -61,11 +61,11 @@ macro_log_feature(Qt5Widgets_FOUND "Qt5Widgets" "Support for Qt5Widgets" "http:/
 macro_log_feature(Qt5LinguistTools_FOUND "Qt5LinguistTools" "Support for Qt5LinguistTools" "http://qt-project.org" "")
 
 # Find Solid
-find_package(solid "5.0.0" REQUIRED)
-if(NOT solid_FOUND)
+find_package(Solid "5.0.0" REQUIRED)
+if(NOT Solid_FOUND)
     message(FATAL_ERROR "Solid module is required!")
 endif()
-macro_log_feature(solid_FOUND "Solid" "Support for Solid" "http://solid.kde.org" "")
+macro_log_feature(Solid_FOUND "Solid" "Support for Solid" "http://solid.kde.org" "")
 
 # Find pkg-config executable
 find_program(PKGCONFIG_EXECUTABLE pkg-config)
