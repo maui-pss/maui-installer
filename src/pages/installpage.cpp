@@ -25,6 +25,7 @@
  ***************************************************************************/
 
 #include <QAbstractButton>
+#include <QProcess>
 #include <QTimer>
 
 #include "installpage.h"
@@ -64,6 +65,16 @@ void InstallPage::start()
 {
     ui->timeRemaining->setText(tr("Time remaining: Calculating..."));
     wizard()->button(QWizard::BackButton)->setEnabled(false);
+
+    QProcess *process = new QProcess(this);
+    connect(process, SIGNAL(finished(int, QProcess::ExitStatus)),
+            this, SLOT(processFinished(int, QProcess::ExitStatus)));
+    connect(process, SIGNAL(readyRead())
+    process->start("/ciao");
+}
+
+void InstallPage::processFinished(int exitCode, QProcess::ExitStatus status)
+{
 }
 
 #include "moc_installpage.cpp"

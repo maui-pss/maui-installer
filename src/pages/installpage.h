@@ -48,6 +48,7 @@ private:
 
 private Q_SLOTS:
     void start();
+    void processFinished(int exitCode, QProcess::ExitStatus status);
 };
 
 #endif // INSTALLPAGE_H
