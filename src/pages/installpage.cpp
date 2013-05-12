@@ -65,11 +65,12 @@ void InstallPage::start()
     ui->timeRemaining->setText(tr("Time remaining: Calculating..."));
     wizard()->button(QWizard::BackButton)->setEnabled(false);
 
+#if 0
     QProcess *process = new QProcess(this);
     connect(process, SIGNAL(finished(int, QProcess::ExitStatus)),
             this, SLOT(processFinished(int, QProcess::ExitStatus)));
-    connect(process, SIGNAL(readyRead())
     process->start("/ciao");
+#endif
 }
 
 void InstallPage::processFinished(int exitCode, QProcess::ExitStatus status)
