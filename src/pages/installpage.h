@@ -28,6 +28,7 @@
 #define INSTALLPAGE_H
 
 #include <QWizardPage>
+#include <QProcess>
 
 namespace Ui {
     class InstallPage;

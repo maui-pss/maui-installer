@@ -25,7 +25,6 @@
  ***************************************************************************/
 
 #include <QAbstractButton>
-#include <QProcess>
 #include <QTimer>
 
 #include "installpage.h"
