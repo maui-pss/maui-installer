@@ -1,5 +1,15 @@
 <RCC>
     <qresource prefix="/">
         <file>images/m.png</file>
+        <file>images/noise_lines_@2X.png</file>
+        <file>images/noise_lines.png</file>
+        <file>qml/Header.qml</file>
+        <file>qml/InstallationPage.qml</file>
+        <file>qml/ListDelegate.qml</file>
+        <file>qml/Page.qml</file>
+        <file>qml/PartitionPage.qml</file>
+        <file>qml/UserPage.qml</file>
+        <file>qml/WelcomePage.qml</file>
+        <file>qml/Wizard.qml</file>
     </qresource>
 </RCC>

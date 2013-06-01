@@ -24,35 +24,43 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QMessageBox>
-#include <QWizard>
-#include <QCloseEvent>
+#include <QtQml/QQmlEngine>
+#include <QtQml/QQmlComponent>
+#include <QtQuick/QQuickWindow>
+
 #include <solid/acadapter.h>
 #include <solid/powermanagement.h>
 
 #include "installer.h"
-#include "pages/welcomepage.h"
-#include "pages/partitionpage.h"
-#include "pages/userpage.h"
-#include "pages/installpage.h"
-#include "pages/thankspage.h"
+#include "volumemodel.h"
 
 int main(int argc, char *argv[])
 {
     // Make sure we use the correct desktop settings
-    setenv("DESKTOP_SESSION", "hawaii", 1);
+    //setenv("DESKTOP_SESSION", "hawaii", 1);
 
     Installer app(argc, argv);
 
-    // Setup wizard
-    QWizard wizard;
-    wizard.addPage(new WelcomePage(&wizard));
-    wizard.addPage(new PartitionPage(&wizard));
-    wizard.addPage(new UserPage(&wizard));
-    wizard.addPage(new InstallPage(&wizard));
-    wizard.addPage(new ThanksPage(&wizard));
-    wizard.show();
+    qmlRegisterType<VolumeModel>("Maui.Installer", 0, 1, "VolumeModel");
 
+    QQmlEngine engine;
+    QQmlComponent component(&engine);
+    component.loadUrl(QUrl("qrc:/qml/Wizard.qml"));
+    if (!component.isReady()) {
+        qWarning("%s", qPrintable(component.errorString()));
+        return 1;
+    }
+
+    QObject *topLevel = component.create();
+    QQuickWindow *window = qobject_cast<QQuickWindow *>(topLevel);
+    if (!window) {
+        qWarning("Error: your root item has to be a Window!");
+        return 1;
+    }
+
+    QObject::connect(&engine, SIGNAL(quit()), &app, SLOT(quit()));
+
+#if 0
     // Detect whether AC adapter is plugged or not
     bool isPlugged = false;
     const QList<Solid::Device> list = Solid::Device::listFromType(Solid::DeviceInterface::AcAdapter);
@@ -75,6 +83,9 @@ int main(int argc, char *argv[])
         if (dialog.exec() == QMessageBox::No)
             app.postEvent(&app, new QCloseEvent);
     }
+#endif
+
+    window->show();
 
     return app.exec();
 }

@@ -46,7 +46,12 @@ class VolumeModel : public QAbstractListModel
     Q_ENUMS(VolumeRole)
 public:
     enum VolumeRole {
-        UdiRole = Qt::UserRole + 1
+        UdiRole = Qt::UserRole + 1,
+        DeviceNameRole,
+        LabelRole,
+        IconNameRole,
+        SizeRole,
+        FormattedSizeRole
     };
 
     explicit VolumeModel(QObject *parent = 0);
@@ -56,6 +61,8 @@ public:
     QString text(const QModelIndex &index) const;
 
     Solid::Device device(const QModelIndex &index) const;
+
+    QHash<int, QByteArray> roleNames() const;
 
     QVariant data(const QModelIndex &index, int role) const;
 

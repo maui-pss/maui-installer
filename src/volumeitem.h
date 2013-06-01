@@ -51,6 +51,8 @@ public:
 
 private:
     Solid::Device m_device;
+
+    QString representSize(qulonglong size) const;
 };
 
 #endif // VOLUMEITEM_H

@@ -27,14 +27,13 @@
 #include "installer.h"
 
 Installer::Installer(int &argc, char *argv[])
-    : QApplication(argc, argv)
+    : QGuiApplication(argc, argv)
 {
     // Setup application
     setApplicationName("Maui Installer");
     setApplicationVersion("0.0.0");
     setOrganizationDomain("maui-project.org");
     setOrganizationName("Maui");
-    setQuitOnLastWindowClosed(true);
 }
 
 #include "moc_installer.cpp"

@@ -49,15 +49,9 @@ if(CMAKE_BUILD_TYPE MATCHES "^[Rr]elease$")
 endif()
 
 # Find Qt
-find_package(Qt5Widgets REQUIRED)
-if(NOT Qt5Widgets_FOUND)
-    message(FATAL_ERROR "Qt5Widgets module is required!")
-endif()
-find_package(Qt5LinguistTools REQUIRED)
-if(NOT Qt5LinguistTools_FOUND)
-    message(FATAL_ERROR "Qt5LinguistTools module is required!")
-endif()
-macro_log_feature(Qt5Widgets_FOUND "Qt5Widgets" "Support for Qt5Widgets" "http://qt-project.org" "")
+find_package(Qt5 REQUIRED COMPONENTS Qml Quick)
+macro_log_feature(Qt5Qml_FOUND "Qt5Qml" "Support for Qt5Qml" "http://qt-project.org" "")
+macro_log_feature(Qt5Quick_FOUND "Qt5Quick" "Support for Qt5Quick" "http://qt-project.org" "")
 macro_log_feature(Qt5LinguistTools_FOUND "Qt5LinguistTools" "Support for Qt5LinguistTools" "http://qt-project.org" "")
 
 # Find Solid

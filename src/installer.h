@@ -27,13 +27,14 @@
 #ifndef INSTALLER_H
 #define INSTALLER_H
 
-#include <QApplication>
+#include <QGuiApplication>
 
 #include <solid/device.h>
 
-class Installer : public QApplication
+class Installer : public QGuiApplication
 {
     Q_OBJECT
+    Q_PROPERTY(QString language READ language WRITE setLanguage)
 public:
     explicit Installer(int &argc, char *argv[]);
 

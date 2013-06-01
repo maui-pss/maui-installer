@@ -72,6 +72,18 @@ Solid::Device VolumeModel::device(const QModelIndex &index) const
     return item->device();
 }
 
+QHash<int, QByteArray> VolumeModel::roleNames() const
+{
+    QHash<int, QByteArray> roles;
+    roles[UdiRole] = "udi";
+    roles[DeviceNameRole] = "deviceName";
+    roles[LabelRole] = "label";
+    roles[IconNameRole] = "iconName";
+    roles[SizeRole] = "size";
+    roles[FormattedSizeRole] = "formattedSize";
+    return roles;
+}
+
 QVariant VolumeModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
