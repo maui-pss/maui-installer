@@ -80,5 +80,15 @@ Page {
                 }
             }
         }
+
+        Label {
+            text: qsTr("A graphical partition manager is not yet available. " +
+                       "Open a terminal and use parted to partition your disk.")
+        }
+
+        Button {
+            text: qsTr("Run Terminal")
+            onClicked: installer.runTerminal()
+        }
     }
 }

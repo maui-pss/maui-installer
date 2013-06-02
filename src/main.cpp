@@ -26,6 +26,7 @@
 
 #include <QtQml/QQmlEngine>
 #include <QtQml/QQmlComponent>
+#include <QtQml/QQmlContext>
 #include <QtQuick/QQuickWindow>
 
 #include <solid/acadapter.h>
@@ -33,6 +34,7 @@
 
 #include "installer.h"
 #include "volumemodel.h"
+#include "engine.h"
 
 int main(int argc, char *argv[])
 {
@@ -50,6 +52,8 @@ int main(int argc, char *argv[])
         qWarning("%s", qPrintable(component.errorString()));
         return 1;
     }
+
+    engine.rootContext()->setContextProperty("installer", new Engine(&app));
 
     QObject *topLevel = component.create();
     QQuickWindow *window = qobject_cast<QQuickWindow *>(topLevel);

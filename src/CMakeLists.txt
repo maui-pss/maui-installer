@@ -5,6 +5,7 @@ include_directories(
 set(SOURCES
     main.cpp
     installer.cpp
+    engine.cpp
     volumemodel.cpp
     volumeitem.cpp
 )
