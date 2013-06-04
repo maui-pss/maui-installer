@@ -3,6 +3,7 @@ import QtQuick 2.1
 import QtQuick.Controls 1.0
 import QtQuick.Controls.Styles 1.0
 import QtQuick.Layouts 1.0
+import Maui.Installer 0.1
 
 Page {
     id: welcomePage
@@ -14,20 +15,6 @@ Page {
 
         Button {
             action: nextAction
-        }
-    }
-
-    ListModel {
-        id: langModel
-
-        ListElement {
-            code: "en_US"
-            label: "English"
-        }
-
-        ListElement {
-            code: "it_IT"
-            label: "Italiano"
         }
     }
 
@@ -67,9 +54,9 @@ Page {
 
             alternatingRowColors: false
             headerVisible: false
-            model: langModel
+            model: LanguagesModel {}
 
-            TableViewColumn { role: "label" }
+            TableViewColumn { role: "name" }
         }
     }
 }

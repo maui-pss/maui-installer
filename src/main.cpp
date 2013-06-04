@@ -33,8 +33,9 @@
 #include <solid/powermanagement.h>
 
 #include "installer.h"
-#include "volumemodel.h"
 #include "engine.h"
+#include "volumemodel.h"
+#include "languagesmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -43,6 +44,8 @@ int main(int argc, char *argv[])
 
     Installer app(argc, argv);
 
+    // Register QML types
+    qmlRegisterType<LanguagesModel>("Maui.Installer", 0, 1, "LanguagesModel");
     qmlRegisterType<VolumeModel>("Maui.Installer", 0, 1, "VolumeModel");
 
     QQmlEngine engine;

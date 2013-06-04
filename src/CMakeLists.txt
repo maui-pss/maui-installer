@@ -6,6 +6,7 @@ set(SOURCES
     main.cpp
     installer.cpp
     engine.cpp
+    languagesmodel.cpp
     volumemodel.cpp
     volumeitem.cpp
 )
