@@ -10,9 +10,8 @@ ApplicationWindow {
     width: 700
     height: 500
     toolBar: Header {
-        id: header
         title: pageStack.currentItem ? pageStack.currentItem.title : ""
-        buttonsBar: pageStack.currentItem ? pageStack.currentItem.buttonsBar : null
+        buttonsBar: pageStack.currentItem ? pageStack.currentItem.buttonsBar : []
     }
 
     StackView {

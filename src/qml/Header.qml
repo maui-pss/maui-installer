@@ -11,7 +11,7 @@ ToolBar {
 
     property int margin: 11
 
-    Item {
+    RowLayout {
         id: container
         anchors {
             fill: parent
@@ -20,24 +20,18 @@ ToolBar {
 
         Label {
             id: titleLabel
-            anchors {
-                left: parent.left
-                top: parent.top
-                bottom: parent.bottom
-            }
             font.bold: true
             font.pointSize: 16
-            width: parent.width - buttons.width - (margin * 2)
+
+            Layout.alignment: Qt.AlignLeft
+            Layout.fillHeight: true
         }
 
-        Item {
+        RowLayout {
             id: buttons
-            anchors {
-                top: parent.top
-                right: parent.right
-                bottom: parent.bottom
-            }
-            width: childrenRect.width
+
+            Layout.alignment: Qt.AlignRight
+            Layout.fillHeight: true
         }
     }
 }
