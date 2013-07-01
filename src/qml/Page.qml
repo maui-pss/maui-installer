@@ -14,7 +14,8 @@ Item {
 
     Image {
         anchors.fill: parent
-        source: "qrc:/images/noise_lines.png"
+        source: "qrc:/images/noise-texture.png"
+        sourceSize: Qt.size(100, 100)
         fillMode: Image.Tile
 
         Item {

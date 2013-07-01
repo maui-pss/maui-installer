@@ -1,8 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>images/m.png</file>
-        <file>images/noise_lines_@2X.png</file>
-        <file>images/noise_lines.png</file>
+        <file>images/noise-texture.png</file>
+        <file>images/noise-texture_@2X.png</file>
         <file>qml/Header.qml</file>
         <file>qml/InstallationPage.qml</file>
         <file>qml/ListDelegate.qml</file>
