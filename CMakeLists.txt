@@ -17,8 +17,8 @@ set(INSTALLER_VERSION_STRING "${INSTALLER_VERSION_MAJOR}.${INSTALLER_VERSION_MIN
 # Installation directories
 include(HawaiiInstallDirs)
 
-# Log features
-include(MacroLogFeature)
+# Macro to print feature summary
+include(FeatureSummary)
 
 # Add custom uninstall target
 configure_file(
@@ -50,16 +50,9 @@ endif()
 
 # Find Qt
 find_package(Qt5 REQUIRED COMPONENTS Qml Quick)
-macro_log_feature(Qt5Qml_FOUND "Qt5Qml" "Support for Qt5Qml" "http://qt-project.org" "")
-macro_log_feature(Qt5Quick_FOUND "Qt5Quick" "Support for Qt5Quick" "http://qt-project.org" "")
-macro_log_feature(Qt5LinguistTools_FOUND "Qt5LinguistTools" "Support for Qt5LinguistTools" "http://qt-project.org" "")
 
 # Find Solid
 find_package(Solid "5.0.0" REQUIRED)
-if(NOT Solid_FOUND)
-    message(FATAL_ERROR "Solid module is required!")
-endif()
-macro_log_feature(Solid_FOUND "Solid" "Support for Solid" "http://solid.kde.org" "")
 
 # Find pkg-config executable
 find_program(PKGCONFIG_EXECUTABLE pkg-config)
@@ -71,5 +64,5 @@ endif()
 #add_subdirectory(data)
 add_subdirectory(src)
 
-# Display featute log
-macro_display_feature_log()
+# Display featute summary
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
