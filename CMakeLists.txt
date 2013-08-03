@@ -15,7 +15,7 @@ set(INSTALLER_VERSION_PATCH 0)
 set(INSTALLER_VERSION_STRING "${INSTALLER_VERSION_MAJOR}.${INSTALLER_VERSION_MINOR}.${INSTALLER_VERSION_PATCH}")
 
 # Installation directories
-include(HawaiiInstallDirs)
+include(GNUInstallDirs)
 
 # Macro to print feature summary
 include(FeatureSummary)
