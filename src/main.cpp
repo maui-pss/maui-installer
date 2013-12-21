@@ -29,8 +29,8 @@
 #include <QtQml/QQmlContext>
 #include <QtQuick/QQuickWindow>
 
-#include <solid/acadapter.h>
-#include <solid/powermanagement.h>
+#include <KF5/solid/acadapter.h>
+#include <KF5/solid/powermanagement.h>
 
 #include "installer.h"
 #include "engine.h"

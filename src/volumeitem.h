@@ -30,8 +30,8 @@
 #include <QObject>
 #include <QPointer>
 
-#include <solid/device.h>
-#include <solid/storagevolume.h>
+#include <KF5/solid/device.h>
+#include <KF5/solid/storagevolume.h>
 
 class VolumeItem : public QObject
 {

@@ -27,9 +27,9 @@
 #include <QIcon>
 #include <QStringList>
 
-#include <solid/device.h>
-#include <solid/devicenotifier.h>
-#include <solid/storagevolume.h>
+#include <KF5/solid/device.h>
+#include <KF5/solid/devicenotifier.h>
+#include <KF5/solid/storagevolume.h>
 
 #include "volumemodel.h"
 #include "volumeitem.h"

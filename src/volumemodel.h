@@ -29,7 +29,7 @@
 
 #include <QAbstractListModel>
 
-#include <solid/predicate.h>
+#include <KF5/solid/predicate.h>
 
 class QStringList;
 

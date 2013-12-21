@@ -29,7 +29,7 @@
 
 #include <QGuiApplication>
 
-#include <solid/device.h>
+#include <KF5/solid/device.h>
 
 class Installer : public QGuiApplication
 {

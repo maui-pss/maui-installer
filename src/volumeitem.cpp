@@ -28,7 +28,7 @@
 #include <QtCore/QLocale>
 #include <QtGui/QIcon>
 
-#include <solid/block.h>
+#include <KF5/solid/block.h>
 
 #include "volumeitem.h"
 #include "volumemodel.h"
