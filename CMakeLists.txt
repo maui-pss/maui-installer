@@ -49,7 +49,7 @@ if(CMAKE_BUILD_TYPE MATCHES "^[Rr]elease$")
 endif()
 
 # Find Qt
-find_package(Qt5 5.1.0 REQUIRED COMPONENTS Qml Quick)
+find_package(Qt5 5.2 REQUIRED COMPONENTS Qml Quick)
 
 # Find Solid
 find_package(Solid "5.0.0" REQUIRED)
