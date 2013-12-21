@@ -52,7 +52,7 @@ endif()
 find_package(Qt5 5.2 REQUIRED COMPONENTS Qml Quick)
 
 # Find Solid
-find_package(Solid "5.0.0" REQUIRED)
+find_package(KF5Solid "5.0.0" REQUIRED)
 
 # Find pkg-config executable
 find_program(PKGCONFIG_EXECUTABLE pkg-config)
