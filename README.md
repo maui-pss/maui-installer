@@ -1,24 +1,15 @@
 Maui Installer
 ==============
 
-This is the Maui graphical installer.
+Maui graphical installer is Calamares.
+
+This repository contains additional modules and configuration.
+Calamares is available from https://github.com/calamares/calamares
 
 ## Dependencies
 
-In order to build and install this program you need Qt 5.2 or better with
-at least the following modules:
-
-* qtbase
-* qtdeclarative
-* qtquickcontrols
-
-You can either build Qt from git yourself or download binaries.
-
-More information about building Qt 5 from can be found here:
-
-  http://qt-project.org/wiki/Building-Qt-5-from-Git
-
-Qt 5 binaries can be downloaded from http://qt-project.org/downloads
+In order to build and install this program you need Calamares.
+Please head to the Calamares page for more information.
 
 ## Build
 
