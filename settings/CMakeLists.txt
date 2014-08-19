@@ -1,4 +1,5 @@
 set(FILES
+    displaymanager.conf
     locale.conf
     unpackfs.conf
 )
