@@ -53,6 +53,7 @@ endif()
 # Subdirectories
 add_subdirectory(data)
 add_subdirectory(settings)
+add_subdirectory(modules)
 
 # Display featute summary
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
