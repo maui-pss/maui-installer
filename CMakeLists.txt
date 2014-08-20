@@ -51,6 +51,7 @@ if(CMAKE_BUILD_TYPE MATCHES "^[Rr]elease$")
 endif()
 
 # Subdirectories
+add_subdirectory(data)
 add_subdirectory(settings)
 
 # Display featute summary
