@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Install Maui
+Comment=Install Maui on this system
+Type=Application
+Exec=sudo /usr/bin/calamares
+TryExec=/usr/bin/calamares
+Icon=system-software-installer
