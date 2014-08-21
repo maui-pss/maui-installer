@@ -45,7 +45,7 @@ def retrieve_kernels(root_mount_point):
 
 def write_conf():
     for key in libcalamares.job.configuration.keys():
-        setattr(locals(), "cfg_" + key, libcalamares.job.configuration[key]
+        setattr(locals(), "cfg_" + key, libcalamares.job.configuration[key])
 
     root_mount_point = libcalamares.globalstorage.value("rootMountPoint")
     install_path = libcalamares.globalstorage.value("bootLoader")["installPath"]
@@ -71,7 +71,7 @@ def write_conf():
         f.write("\tmenu label %s\n" % kernel["version"])
         f.write("\tkernel %s\n" % kernel["filename"])
         if kernel["initramfs"]:
-            f.write("\tappend initrd=%s root=%s ro quiet splash\n" % (kernel["initramfs"], install_path)))
+            f.write("\tappend initrd=%s root=%s ro quiet splash\n" % (kernel["initramfs"], install_path))
         else:
             f.write("\tappend root=%s ro quiet splash\n" % install_path)
         f.write("\tmenu default\n\n")
