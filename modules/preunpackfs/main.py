@@ -44,7 +44,6 @@ class PreUnpackOperation:
         return None
 
     def mount_image(self, entry):
-        os.makedirs(entry.destination)
         subprocess.check_call(["mount",
                                entry.source,
                                entry.destination,
@@ -70,15 +69,6 @@ def run():
 
     PATH_PROCFS = '/proc/filesystems'
 
-    root_mount_point = globalstorage.value("rootMountPoint")
-    if not root_mount_point:
-        return ("No mount point for root partition in globalstorage",
-                "globalstorage does not contain a \"rootMountPoint\" key, "
-                "doing nothing")
-    if not os.path.exists(root_mount_point):
-        return ("Bad mount point for root partition in globalstorage",
-                "globalstorage[\"rootMountPoint\"] is \"{}\", which does not "
-                "exist, doing nothing".format(root_mount_point))
     preunpack = list()
 
     for entry in job.configuration["preunpack"]:
@@ -106,15 +96,17 @@ def run():
         if fs_is_supported == False:
             return "Bad filesystem", "sourcefs=\"{}\"".format(sourcefs)
 
-        destination = os.path.abspath(root_mount_point + entry["destination"])
-
-        if not os.path.isfile(source):
-            return ("Bad source", "source=\"{}\"".format(source))
-        if not os.path.isdir(destination):
+        destination = os.path.abspath(entry["destination"])
+        try:
+            os.makedirs(destination)
+        except:
             return ("Bad destination",
                     "destination=\"{}\"".format(destination))
 
+        if not os.path.isfile(source):
+            return ("Bad source", "source=\"{}\"".format(source))
+
         preunpack.append(PreUnpackEntry(source, sourcefs, destination))
 
-    preunpackop = PreUnpackOperation(unpack)
+    preunpackop = PreUnpackOperation(preunpack)
     return preunpackop.run()
