@@ -17,6 +17,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with Calamares. If not, see <http://www.gnu.org/licenses/>.
 
+import os
 import libcalamares
 from libcalamares.utils import check_chroot_call
 
@@ -85,6 +86,6 @@ def write_conf():
     f.close()    
 
 def run():
-    install_extlinux()
+    #install_extlinux()
     write_conf()
     return None
