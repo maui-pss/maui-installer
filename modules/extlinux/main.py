@@ -69,6 +69,8 @@ def write_conf():
     kernels = retrieve_kernels(root_mount_point)
     i = 0
     for kernel in kernels:
+        print("Create entry %d for kernel %s" % (i, kernel["version"]))
+
         f.write("label %d\n" % i)
         f.write("\tmenu label %s\n" % kernel["version"])
         f.write("\tkernel %s\n" % kernel["filename"])
@@ -78,9 +80,15 @@ def write_conf():
             f.write("\tappend root=%s ro quiet splash\n" % install_path)
         f.write("\tmenu default\n\n")
 
-        os.symlink("../%s" % kernel["filename"], os.path.join(root_mount_point, CONF_DIR, kernel["filename"]))
+        kernel_filename = os.path.join(root_mount_point, CONF_DIR, kernel["filename"])
+        if os.path.exists(kernel_filename) or os.path.lexists(kernel_filename):
+            os.remove(kernel_filename)
+        os.symlink("../%s" % kernel["filename"], kernel_filename)
         if kernel["initramfs"]:
-            os.symlink("../%s" % kernel["initramfs"], os.path.join(root_mount_point, CONF_DIR, kernel["initramfs"]))
+            initramfs_filename = os.path.join(root_mount_point, CONF_DIR, kernel["initramfs"])
+            if os.path.exists(initramfs_filename) or os.path.lexists(initramfs_filename):
+                os.remove(initramfs_filename)
+            os.symlink("../%s" % kernel["initramfs"], initramfs_filename)
 
         i += 1
 
