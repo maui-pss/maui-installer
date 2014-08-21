@@ -45,9 +45,6 @@ def retrieve_kernels(root_mount_point):
     return kernels
 
 def write_conf():
-    for key in libcalamares.job.configuration.keys():
-        setattr(locals(), "cfg_" + key, libcalamares.job.configuration[key])
-
     root_mount_point = libcalamares.globalstorage.value("rootMountPoint")
     install_path = libcalamares.globalstorage.value("bootLoader")["installPath"]
 
@@ -90,6 +87,9 @@ def write_conf():
     f.close()    
 
 def run():
-    #install_extlinux()
+    for key in libcalamares.job.configuration.keys():
+        globals()["cfg_" + key] = libcalamares.job.configuration[key]
+
+    install_extlinux()
     write_conf()
     return None
