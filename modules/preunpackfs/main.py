@@ -22,6 +22,7 @@
 import os
 import subprocess
 
+import libcalamares
 from libcalamares import *
 
 class PreUnpackEntry:
@@ -69,6 +70,8 @@ def run():
 
     PATH_PROCFS = '/proc/filesystems'
 
+    mount_points = []
+
     preunpack = list()
 
     for entry in job.configuration["preunpack"]:
@@ -106,7 +109,10 @@ def run():
         if not os.path.isfile(source):
             return ("Bad source", "source=\"{}\"".format(source))
 
+        mount_points.append(destination)
         preunpack.append(PreUnpackEntry(source, sourcefs, destination))
+
+    libcalamres.globalstorage.insert("mountPointsToClean", mount_points)
 
     preunpackop = PreUnpackOperation(preunpack)
     return preunpackop.run()
