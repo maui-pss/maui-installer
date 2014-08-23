@@ -3,7 +3,7 @@
 ---
 # Modules can be job modules (with different interfaces) and QtWidgets view modules.
 # They could all be placed in a number of different paths.
-modules-search: [ local, /path/to/dir/with/more/modules ]
+modules-search: [ local, @CMAKE_INSTALL_FULL_LIBDIR@/maui-installer/modules ]
 
 # We define the module names in the order they should show up (QtWidget view modules,
 # with one or more pages) OR be executed if enqueued (all other modules).
