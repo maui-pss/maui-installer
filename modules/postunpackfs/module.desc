@@ -1,0 +1,5 @@
+---
+type:       "job"
+name:       "postunpackfs"
+interface:  "python"
+script:     "main.py"
