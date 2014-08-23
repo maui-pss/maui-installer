@@ -6,6 +6,7 @@ configure_file(
 
 set(FILES
     displaymanager.conf
+    extlinux.conf
     locale.conf
     unpackfs.conf
 )
