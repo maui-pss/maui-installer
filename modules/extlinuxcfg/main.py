@@ -42,6 +42,7 @@ def retrieve_kernels(root_mount_point):
     return kernels
 
 def write_conf(root_mount_point, install_path):
+    cfg_distributor = libcalamares.job.configuration["distributor"]
     cfg_prompt = libcalamares.job.configuration["prompt"]
     cfg_timeout = libcalamares.job.configuration["timeout"]
     cfg_menu = libcalamares.job.configuration["menu"]
@@ -63,7 +64,7 @@ def write_conf(root_mount_point, install_path):
     if cfg_background:
         check_chroot_call(["cp", cfg_background, os.path.join(CONF_DIR, os.path.basename(cfg_background))])
         f.write("menu background %s\n" % os.path.basename(cfg_background))
-    f.write("menu title Welcome!\n\n")
+    f.write("menu title Welcome to %s!\n\n" % cfg_distributor)
 
     kernels = retrieve_kernels(root_mount_point)
     i = 0
@@ -71,7 +72,7 @@ def write_conf(root_mount_point, install_path):
         print("Create entry %d for kernel %s" % (i, kernel["version"]))
 
         f.write("label %d\n" % i)
-        f.write("\tmenu label %s\n" % kernel["version"])
+        f.write("\tmenu label %s (%s)\n" % (cfg_distributor, kernel["version"]))
         f.write("\tkernel %s\n" % kernel["filename"])
         if kernel["initramfs"]:
             f.write("\tappend initrd=%s root=%s ro quiet splash\n" % (kernel["initramfs"], install_path))
