@@ -1,0 +1,5 @@
+---
+type:       "job"
+name:       "extlinuxcfg"
+interface:  "python"
+script:     "main.py"

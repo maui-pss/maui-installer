@@ -1,3 +1,4 @@
 add_subdirectory(preunpackfs)
 add_subdirectory(extlinux)
+add_subdirectory(extlinuxcfg)
 add_subdirectory(postinstall)
