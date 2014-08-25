@@ -41,7 +41,24 @@ def retrieve_kernels(root_mount_point):
 
     return kernels
 
-def write_conf(root_mount_point, install_path):
+def write_conf(partitions, root_mount_point, install_path):
+    plymouth_bin = os.path.join(root_mount_point, "usr/bin/plymouth")
+    use_splash = ""
+    swap_uuid = ""
+
+    if os.path.exists(plymoth_bin):
+        use_splash = "splash"
+
+    for partition in partitions:
+        if partition["fs"] == "linuxswap":
+            swap_uuid = partition["uuid"]
+
+    kernel_cmdline = "root=%s ro " % install_path
+    if swap_uuid != "":
+        kernel_cmdline += "resume=UUID=%s quiet %s" % (swap_uuid, use_splash)
+    else:
+        kernel_cmdline += "quiet %s" % use_splash
+
     cfg_distributor = libcalamares.job.configuration["distributor"]
     cfg_prompt = libcalamares.job.configuration["prompt"]
     cfg_timeout = libcalamares.job.configuration["timeout"]
@@ -75,9 +92,9 @@ def write_conf(root_mount_point, install_path):
         f.write("\tmenu label %s (%s)\n" % (cfg_distributor, kernel["version"]))
         f.write("\tkernel %s\n" % kernel["filename"])
         if kernel["initramfs"]:
-            f.write("\tappend initrd=%s root=%s ro quiet splash\n" % (kernel["initramfs"], install_path))
+            f.write("\tappend initrd=%s %s\n" % (kernel["initramfs"], kernel_cmdline))
         else:
-            f.write("\tappend root=%s ro quiet splash\n" % install_path)
+            f.write("\tappend %s\n" % kernel_cmdline)
         f.write("\tmenu default\n\n")
 
         kernel_filename = os.path.join(root_mount_point, CONF_DIR, kernel["filename"])
@@ -95,7 +112,8 @@ def write_conf(root_mount_point, install_path):
     f.close()    
 
 def run():
+    partitions = libcalamares.globalstorage.value("partitions")
     root_mount_point = libcalamares.globalstorage.value("rootMountPoint")
     install_path = libcalamares.globalstorage.value("bootLoader")["installPath"]
-    write_conf(root_mount_point, install_path)
+    write_conf(partitions, root_mount_point, install_path)
     return None
