@@ -26,16 +26,13 @@
 # $END_LICENSE$
 ############################################################################/
 
-import os, shutil
 import libcalamares
 from libcalamares.utils import check_chroot_call
 
 def postinstall():
     root_mount_point = libcalamares.globalstorage.value("rootMountPoint")
 
-    live_homedir = os.path.join(root_mount_point, "home", "live")
-    if os.path.isdir(live_homedir):
-        shutil.rmtree(live_homedir)
+    check_chroot_call(["userdel", "-r", "live"])
 
 def run():
     postinstall()
