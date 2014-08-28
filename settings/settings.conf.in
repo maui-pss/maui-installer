@@ -37,13 +37,13 @@ install:
 - locale
 - keyboard
 - dracut
+- postinstall
 - users
 - networkcfg
 - hwclock
 - services
 - extlinuxcfg
 - extlinux
-- postinstall
 - umount
 
 # Phase 3 - postinstall.
