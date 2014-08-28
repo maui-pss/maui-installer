@@ -8,6 +8,7 @@ set(FILES
     displaymanager.conf
     extlinux.conf
     locale.conf
+    prepare.conf
     unpackfs.conf
 )
 

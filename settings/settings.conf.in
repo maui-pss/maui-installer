@@ -16,6 +16,7 @@ modules-search: [ local, @CMAKE_INSTALL_FULL_LIBDIR@/maui-installer/modules ]
 # Jobs should be executed sparingly (if at all) in this phase.
 prepare:
 - greeting
+- prepare
 - locale
 - keyboard
 - users
