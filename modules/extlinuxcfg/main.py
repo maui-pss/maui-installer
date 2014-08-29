@@ -46,7 +46,7 @@ def write_conf(partitions, root_mount_point, install_path):
     use_splash = ""
     swap_uuid = ""
 
-    if os.path.exists(plymoth_bin):
+    if os.path.exists(plymouth_bin):
         use_splash = "splash"
 
     for partition in partitions:
