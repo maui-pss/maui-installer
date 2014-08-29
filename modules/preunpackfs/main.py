@@ -112,7 +112,7 @@ def run():
         mount_points.append(destination)
         preunpack.append(PreUnpackEntry(source, sourcefs, destination))
 
-    libcalamres.globalstorage.insert("mountPointsToClean", mount_points)
+    libcalamares.globalstorage.insert("mountPointsToClean", mount_points)
 
     preunpackop = PreUnpackOperation(preunpack)
     return preunpackop.run()
