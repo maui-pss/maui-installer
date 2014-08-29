@@ -22,6 +22,39 @@ from libcalamares.utils import check_chroot_call
 
 CONF_DIR = "/boot/extlinux"
 
+def find_boot_partition(partitions):
+    import re
+
+    root_device = ""
+    boot_device = ""
+
+    for partition in partitions:
+        if partition["mountPoint"] == "/":
+            root_device = partition["device"]
+        if partition["mountPoint"] == "/boot":
+            boot_device = partition["device"]
+            break
+
+    # If a /boot partition was not found it means that
+    # /boot is on the root file system
+    if not boot_device:
+        boot_device = root_device
+
+    m = re.search(r'([1-9]|[1-9][0-9])', boot_device)
+    return m.group(1)
+
 def run():
+    root_mount_point = libcalamares.globalstorage.value("rootMountPoint")
+    install_path = libcalamares.globalstorage.value("installPath")
+    partitions = libcalamares.globalstorage.value("partitions")
+
+    boot_partition = find_boot_partition(partitions)
+
+    mbr_bak = os.path.join(CONF_DIR, "mbr.bak")
+    mbr_bin = os.path.join(rootMountPoint, "usr/share/syslinux/mbr.bin")
+
     check_chroot_call(["/sbin/extlinux", "-i", CONF_DIR])
+    check_chroot_call(["/bin/dd", "if=" + install_path, "of=" + mbr_bak, "count=1", "bs=512"])
+    check_chroot_call(["/bin/dd", "if=" + mbr_bin, "of=" + install_path])
+    check_chroot_call(["sfdisk", "--activate=" + boot_partition, install_path])
     return None
