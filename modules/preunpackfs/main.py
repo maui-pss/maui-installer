@@ -101,7 +101,8 @@ def run():
 
         destination = os.path.abspath(entry["destination"])
         try:
-            os.makedirs(destination)
+            if not os.path.exists(destination):
+                os.makedirs(destination)
         except:
             return ("Bad destination",
                     "destination=\"{}\"".format(destination))
