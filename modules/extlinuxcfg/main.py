@@ -45,15 +45,18 @@ def write_conf(partitions, root_mount_point, install_path):
     plymouth_bin = os.path.join(root_mount_point, "usr/bin/plymouth")
     use_splash = ""
     swap_uuid = ""
+    root_device = ""
 
     if os.path.exists(plymouth_bin):
         use_splash = "splash"
 
     for partition in partitions:
+        if partition["mountPoint"] == "/":
+            root_device = partition["device"]
         if partition["fs"] == "linuxswap":
             swap_uuid = partition["uuid"]
 
-    kernel_cmdline = "root=%s ro " % install_path
+    kernel_cmdline = "root=%s ro " % root_device
     if swap_uuid != "":
         kernel_cmdline += "resume=UUID=%s quiet %s" % (swap_uuid, use_splash)
     else:
