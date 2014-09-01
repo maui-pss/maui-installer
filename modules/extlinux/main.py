@@ -17,6 +17,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with Calamares. If not, see <http://www.gnu.org/licenses/>.
 
+import os
 import libcalamares
 from libcalamares.utils import check_chroot_call
 
@@ -45,13 +46,14 @@ def find_boot_partition(partitions):
 
 def run():
     root_mount_point = libcalamares.globalstorage.value("rootMountPoint")
-    install_path = libcalamares.globalstorage.value("installPath")
+    boot_loader = libcalamares.globalstorage.value("bootLoader")
+    install_path = boot_loader["installPath"]
     partitions = libcalamares.globalstorage.value("partitions")
 
     boot_partition = find_boot_partition(partitions)
 
     mbr_bak = os.path.join(CONF_DIR, "mbr.bak")
-    mbr_bin = os.path.join(rootMountPoint, "usr/share/syslinux/mbr.bin")
+    mbr_bin = "/usr/share/syslinux/mbr.bin"
 
     check_chroot_call(["/sbin/extlinux", "-i", CONF_DIR])
     check_chroot_call(["/bin/dd", "if=" + install_path, "of=" + mbr_bak, "count=1", "bs=512"])
