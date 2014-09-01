@@ -100,12 +100,12 @@ def write_conf(partitions, root_mount_point, install_path):
             f.write("\tappend %s\n" % kernel_cmdline)
         f.write("\tmenu default\n\n")
 
-        kernel_filename = root_mount_point + CONF_DIR + "/" kernel["filename"])
+        kernel_filename = root_mount_point + CONF_DIR + "/" + kernel["filename"]
         if os.path.exists(kernel_filename) or os.path.lexists(kernel_filename):
             os.remove(kernel_filename)
         os.symlink("../%s" % kernel["filename"], kernel_filename)
         if kernel["initramfs"]:
-            initramfs_filename = root_mount_point + CONF_DIR + "/" kernel["initramfs"])
+            initramfs_filename = root_mount_point + CONF_DIR + "/" + kernel["initramfs"]
             if os.path.exists(initramfs_filename) or os.path.lexists(initramfs_filename):
                 os.remove(initramfs_filename)
             os.symlink("../%s" % kernel["initramfs"], initramfs_filename)
